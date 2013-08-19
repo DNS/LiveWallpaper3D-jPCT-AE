@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.example.LiveWallpaper3D"
+          android:versionCode="1"
+          android:versionName="1.0">
+
+    <uses-sdk android:minSdkVersion="7"/>
+    <uses-feature android:name="android.software.live_wallpaper" android:required="true" />
+
+    <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
+        <activity android:name="MyActivity"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <service android:label="@string/service_label" android:name=".MyWallpaperService"
+                 android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+            <meta-data android:name="android.service.wallpaper"
+                       android:resource="@xml/myglwallpaper" />
+        </service>
+
+
+    </application>
+</manifest>
