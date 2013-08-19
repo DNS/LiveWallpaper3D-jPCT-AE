@@ -1,0 +1,1 @@
+fp-barrel.obj on-barrel tp-barrel.jpg rx-0.0 ry-0.0 rz-0.0 tx-0.0 ty-0.0 tz-0.0 oc-0 cx-0 cz-0.0 cc-true sl-false ot--1 bm-null pa-null os-1.0 st-0 sh-1 

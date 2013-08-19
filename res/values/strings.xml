@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">testWallPaper</string>
+    <string name="service_label">Name of your Wallpaper</string>
+    <string name="description">Description of your wallpaper</string>
+</resources>
