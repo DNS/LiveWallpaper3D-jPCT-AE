@@ -2,6 +2,8 @@ package com.example.LiveWallpaper3D;
 
 import android.content.res.AssetManager;
 import android.opengl.GLSurfaceView;
+import android.os.Bundle;
+import android.view.MotionEvent;
 import com.jbrush.ae.EditorObject;
 import com.jbrush.ae.Scene;
 import com.threed.jpct.*;
@@ -68,12 +70,50 @@ public class MyWallpaperService extends GLWallpaperService {
             super();
             renderer = new MyRenderer();
 
-
-            //getHolder().setFormat(PixelFormat.RGBA_8888);
             setRenderer(renderer);
             //setEGLConfigChooser(8, 8, 8, 8, 0, 0);
-
             setRenderMode(RENDERMODE_CONTINUOUSLY);
+        }
+/*
+        public Bundle onCommand (String paramString, int paramInt1, int paramInt2, int paramInt3, Bundle paramBundle, boolean paramBoolean)
+        {
+            if (paramString.equals("android.wallpaper.tap"))
+                MyWallpaperService.this.renderer.onTouch_(null);
+            return null;
+        }
+*/
+        @Override
+        public void onTouchEvent(MotionEvent me)
+        {
+
+            if (me.getAction() == MotionEvent.ACTION_DOWN) {
+                xpos = me.getX();
+                ypos = me.getY();
+            }
+
+            if (me.getAction() == MotionEvent.ACTION_UP) {
+                xpos = -1;
+                ypos = -1;
+                touchTurn = 0;
+                touchTurnUp = 0;
+            }
+
+            if (me.getAction() == MotionEvent.ACTION_MOVE) {
+                float xd = me.getX() - xpos;
+                float yd = me.getY() - ypos;
+
+                xpos = me.getX();
+                ypos = me.getY();
+
+                touchTurn = xd / -100f;
+                touchTurnUp = yd / -100f;
+            }
+
+            try {
+                Thread.sleep(15);
+            } catch (Exception e) {
+                // No need for this...
+            }
         }
 
         public void onDestroy() {
@@ -204,6 +244,45 @@ public class MyWallpaperService extends GLWallpaperService {
             }
             fps++;
         }
+
+       /*
+        public boolean onTouch_(MotionEvent me) {
+
+            if (me.getAction() == MotionEvent.ACTION_DOWN) {
+                xpos = me.getX();
+                ypos = me.getY();
+                return true;
+            }
+
+            if (me.getAction() == MotionEvent.ACTION_UP) {
+                xpos = -1;
+                ypos = -1;
+                touchTurn = 0;
+                touchTurnUp = 0;
+                return true;
+            }
+
+            if (me.getAction() == MotionEvent.ACTION_MOVE) {
+                float xd = me.getX() - xpos;
+                float yd = me.getY() - ypos;
+
+                xpos = me.getX();
+                ypos = me.getY();
+
+                touchTurn = xd / -100f;
+                touchTurnUp = yd / -100f;
+                return true;
+            }
+
+            try {
+                Thread.sleep(15);
+            } catch (Exception e) {
+                // No need for this...
+            }
+
+            return false;
+        }
+        */
 
         public void release() {
         }
